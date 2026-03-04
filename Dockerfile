@@ -32,10 +32,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get install -y eatmydata; \
     eatmydata apt-get install -y \
         make bash tini tar zstd zip unzip \
-        git ca-certificates curl wget \
-        ghostscript biber fontconfig; \
+        git ca-certificates curl wget fontconfig; \
     eatmydata apt-get install -y --no-install-recommends \
-        texlive-full \
+        ghostscript biber texlive-full \
         fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-core fonts-noto-extra \
         fonts-liberation fonts-linuxlibertine; \
     fc-cache -fv; \
