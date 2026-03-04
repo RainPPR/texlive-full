@@ -38,7 +38,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
         fonts-liberation fonts-linuxlibertine; \
     fc-cache -fv; \
     apt-get purge -y --auto-remove eatmydata; \
-    apt-get clean; && \
+    apt-get clean; \
     rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
