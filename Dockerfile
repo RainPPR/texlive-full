@@ -29,13 +29,13 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     set -eux; \
     apt-get update; \
-    apt-get install -y --no-install-recommends eatmydata; \
-    eatmydata apt-get update && eatmydata apt-get install -y --no-install-recommends \
-    make bash tini tar zstd git ca-certificates curl wget \
+    apt-get install -y eatmydata; \
+    eatmydata apt-get update && eatmydata apt-get install -y \
+    make bash tini tar zstd zip unzip \
+    git ca-certificates curl wget \
     ghostscript biber fontconfig texlive-full \
     fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-core fonts-noto-extra \
-    fonts-liberation fonts-linuxlibertine \
-    ca-certificates curl git; \
+    fonts-liberation fonts-linuxlibertine; \
     fc-cache -fv; \
     rm -rf /var/lib/apt/lists/*
 
