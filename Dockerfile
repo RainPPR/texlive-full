@@ -30,13 +30,15 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     set -eux; \
     apt-get update; \
     apt-get install -y eatmydata; \
-    eatmydata apt-get update && eatmydata apt-get install -y \
-    make bash tini tar zstd zip unzip \
-    git ca-certificates curl wget \
-    ghostscript biber fontconfig texlive-full \
-    fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-core fonts-noto-extra \
-    fonts-liberation fonts-linuxlibertine; \
+    eatmydata apt-get install -y \
+        make bash tini tar zstd zip unzip \
+        git ca-certificates curl wget \
+        ghostscript biber fontconfig texlive-full \
+        fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-core fonts-noto-extra \
+        fonts-liberation fonts-linuxlibertine; \
     fc-cache -fv; \
+    apt-get purge -y --auto-remove eatmydata; \
+    apt-get clean; && \
     rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
