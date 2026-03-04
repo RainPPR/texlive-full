@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -25,8 +25,6 @@ RUN set -eux; \
 Acquire::GzipIndexes "true";
 EOF
 
-COPY --chmod=755 ci-cleanup.sh /usr/local/bin/ci-cleanup
-
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     set -eux; \
@@ -39,8 +37,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     fonts-liberation fonts-linuxlibertine \
     ca-certificates curl git; \
     fc-cache -fv; \
-    rm -rf /var/lib/apt/lists/*; \
-    /usr/local/bin/ci-cleanup
+    rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["latexmk", "--version"]
